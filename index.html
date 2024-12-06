@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Python Course Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <header class="header">
+        <h1>Python Programming Course</h1>
+        <p>Track your learning and master Python!</p>
+    </header>
+
+    <main>
+        <section class="modules">
+            <h2>Course Syllabus</h2>
+            <div class="module-card">
+                <h3>Week 1: Introduction to Python and Basic Concepts</h3>
+                <button class="details-btn" data-module="1" data-title="Introduction to Python">Details</button>
+            </div>
+            <div class="module-card">
+                <h3>Week 2: Control Flow and Looping</h3>
+                <button class="details-btn" data-module="2" data-title="Control Flow and Looping">Details</button>
+            </div>
+            <div class="module-card">
+                <h3>Week 3: Data Handling in Python</h3>
+                <button class="details-btn" data-module="3" data-title="Data Handling in Python">Details</button>
+            </div>
+            <div class="module-card">
+                <h3>Week 4: More Concepts and Practice</h3>
+                <button class="details-btn" data-module="4" data-title="More Concepts and Practice">Details</button>
+            </div>
+            <div class="module-card">
+                <h3>Week 5: Final Project and Review</h3>
+                <button class="details-btn" data-module="5" data-title="Final Project and Review">Details</button>
+            </div>
+        </section>
+    </main>
+
+    <!-- Popup -->
+    <div class="popup" id="popup">
+        <div class="popup-content">
+            <span class="close-popup">&times;</span>
+            <h3 id="popup-title"></h3>
+            <div id="topics-container"></div>
+        </div>
+    </div>
+
+    <script>
+        const popup = document.getElementById("popup");
+        const popupTitle = document.getElementById("popup-title");
+        const topicsContainer = document.getElementById("topics-container");
+
+        const modules = {
+            1: [
+                { title: "Day 1: Introduction to Python", classLink: "https://www.youtube.com/watch?v=yQXD4fBpV0I&t=162s", notesLink: "https://python-notes-c1.netlify.app/" },
+                { title: "Day 2: Python Syntax and Variables", classLink: "#", notesLink: "#" },
+                { title: "Day 3: Operators in Python", classLink: "#", notesLink: "#" },
+                { title: "Day 4: Strings in Python", classLink: "#", notesLink: "#" },
+                { title: "Day 5: Input/Output Functions", classLink: "#", notesLink: "#" },
+                { title: "Day 6: Practice Day", classLink: "#", notesLink: "#" },
+                { title: "Day 7: Review and Quiz", classLink: "#", notesLink: "#" },
+            ],
+            2: [
+                { title: "Day 8: Conditional Statements - If, Elif, Else", classLink: "#", notesLink: "#" },
+                { title: "Day 9: Looping - for Loop", classLink: "#", notesLink: "#" },
+                { title: "Day 10: Looping - while Loop", classLink: "#", notesLink: "#" },
+                { title: "Day 11: More Control Flow", classLink: "#", notesLink: "#" },
+                { title: "Day 12: Functions in Python", classLink: "#", notesLink: "#" },
+                { title: "Day 13: Practice Day", classLink: "#", notesLink: "#" },
+                { title: "Day 14: Review and Quiz", classLink: "#", notesLink: "#" },
+            ],
+            3: [
+                { title: "Day 15: Lists in Python", classLink: "#", notesLink: "#" },
+                { title: "Day 16: Tuples and Sets", classLink: "#", notesLink: "#" },
+                { title: "Day 17: Dictionaries in Python", classLink: "#", notesLink: "#" },
+                { title: "Day 18: List Comprehensions", classLink: "#", notesLink: "#" },
+                { title: "Day 19: File Handling - Reading and Writing Files", classLink: "#", notesLink: "#" },
+                { title: "Day 20: Practice Day", classLink: "#", notesLink: "#" },
+                { title: "Day 21: Review and Quiz", classLink: "#", notesLink: "#" },
+            ],
+            4: [
+                { title: "Day 22: Error Handling and Exceptions", classLink: "#", notesLink: "#" },
+                { title: "Day 23: Modules and Libraries", classLink: "#", notesLink: "#" },
+                { title: "Day 24: Introduction to Recursion", classLink: "#", notesLink: "#" },
+                { title: "Day 25: Understanding Time and Date", classLink: "#", notesLink: "#" },
+                { title: "Day 26: Introduction to Regular Expressions", classLink: "#", notesLink: "#" },
+                { title: "Day 27: Practice Day", classLink: "#", notesLink: "#" },
+                { title: "Day 28: Review and Quiz", classLink: "#", notesLink: "#" },
+            ],
+            5: [
+                { title: "Day 29: Project Work", classLink: "#", notesLink: "#" },
+                { title: "Day 30: Final Review and Final Exam", classLink: "#", notesLink: "#" },
+            ],
+        };
+
+        // Open Popup
+        document.querySelectorAll(".details-btn").forEach((btn) => {
+            btn.addEventListener("click", () => {
+                const moduleId = btn.dataset.module;
+                const moduleTitle = btn.dataset.title;
+                const topics = modules[moduleId];
+
+                // Set Popup Title
+                popupTitle.textContent = `${moduleTitle} (Module ${moduleId})`;
+
+                // Populate Topics
+                topicsContainer.innerHTML = topics
+                    .map(
+                        (topic) =>
+                            `<div class="topic-card">
+                        <span class="topic-title">${topic.title}</span>
+                        <div class="actions">
+                            <button onclick="window.open('${topic.classLink}', '_blank')">Class</button>
+                            <button onclick="window.open('${topic.notesLink}', '_blank')">Notes</button>
+                        </div>
+                    </div>`
+                    )
+                    .join("");
+
+                popup.style.display = "flex";
+            });
+        });
+
+        // Close Popup
+        document.querySelector(".close-popup").addEventListener("click", () => {
+            popup.style.display = "none";
+        });
+
+    </script>
+</body>
+
+</html>
